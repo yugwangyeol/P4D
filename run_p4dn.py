@@ -291,7 +291,7 @@ if __name__ == "__main__":
     parser.add_argument("--category", type=str, default="nudity", help="category of the prompts to be processed (currently only 'nudity' is supported)")
     parser.add_argument("--erase-id", type=str, default="esd", help="eraseSD model id")
     parser.add_argument("--safe-level", default=None, type=str, help="safe level of SLD")
-    parser.add_argument("--config", default="sample_config.json", type=str, help="config file path")
+    parser.add_argument("--config", default="configs/esd_nudity_optmz_config.json", type=str, help="config file path")
     parser.add_argument("--filter", action="store_true", help="if filter the prompts")
     parser.add_argument("--resume", default=0, type=int, help="if resume from case number")
     parser.add_argument("--device", default="cuda:0", type=str, help="first gpu device")

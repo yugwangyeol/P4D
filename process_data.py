@@ -25,7 +25,7 @@ SLD_CONFIGS = {
 }
 
 def dummy(images, **kwargs):
-    return images, False
+    return images, [False] * len(images)#False
 
 
 def set_random_seed(seed=0):
@@ -217,15 +217,18 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--prompts-csv", type=str, default="/eva_data0/evil-prompt/exp9/data/unsafe-prompts4703.csv", help="original prompts csv file from eraseSD training data")
+    parser.add_argument("--prompts-csv", type=str, default="./data/unsafe-prompts-nudity_esd.csv", help="original prompts csv file from eraseSD training data")
     parser.add_argument("--save-prompts", type=str, default="./data/unsafe-prompts-nudity.csv", help="valid nudity data csv file after processing")
     parser.add_argument("--num-samples", type=int, default=3, help="number of images to generate with SD")
-    parser.add_argument("--nudenet-path", type=str, default="/eva_data0/evil-prompt/pretrained/nudenet_classifier_model.onnx", help="nudenet classifer checkpoint path")
+    parser.add_argument("--nudenet-path", type=str, default="./pretrained/nudenet_classifier_model.onnx", help="nudenet classifer checkpoint path")
     parser.add_argument("--debug", action="store_true", default=False, help="if debug mode")
     parser.add_argument("--category", type=str, default="nudity", help="category of the prompts to be processed")
     parser.add_argument("--erase-id", type=str, default="esd", help="eraseSD model id")
     parser.add_argument("--safe-level", default="MAX", type=str, help="safe level of SLD")
-    parser.add_argument("--config", default="sample_config.json", type=str, help="config file path")
+    parser.add_argument("--config", default="./configs/esd_nudity_optmz_config.json", type=str, help="config file path")
+    parser.add_argument("--device", type=str, default="cuda:0", help="Primary device")
+    parser.add_argument("--device-2", type=str, default="cuda:1", help="Secondary device")
+
     args = parser.parse_args()
     args.__dict__.update(read_json(args.config))
 
